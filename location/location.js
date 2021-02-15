@@ -25,4 +25,17 @@ const getLocationLatLon = async (location) => {
 
 }
 
-module.exports = { getLocationLatLon }
+const getMapboxLocation = async (location) => {
+    const encodedUrl = encodeURI(location);
+
+    const instance = axios.create({
+        baseURL: `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodedUrl}.json`,
+        params: {
+            'access_token': process.env.MAPBOX_KEY,
+            'limit':5
+        }
+    });
+    return await instance.get();
+}
+
+module.exports = { getLocationLatLon, getMapboxLocation }

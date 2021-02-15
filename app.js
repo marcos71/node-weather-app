@@ -1,3 +1,4 @@
+require('dotenv').config();
 const { getLocationLatLon } = require('./location/location');
 const { getWeather } = require('./weather/weather');
 
@@ -24,7 +25,7 @@ const getInfo = async (location) => {
     try {
         const locationInfo = await getLocationLatLon(location);
         const weatherInfo = await getWeather(locationInfo);
-        return `The weather in ${locationInfo.name} is ${weatherInfo} celcius`;
+        return `The weather in ${locationInfo.name} is ${weatherInfo.main.temp} celcius`;
     } catch (e) {
         return `Could not retrieve the weather from ${location}`;
     }
